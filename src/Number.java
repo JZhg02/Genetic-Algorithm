@@ -60,7 +60,6 @@ public class Number {
             }
             cpt--;
         }
-        System.out.println("This is genetic sum "+sum);
         return(sum);
     }
 

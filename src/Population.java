@@ -7,32 +7,53 @@ public class Population {
     Population(){
         for(int i=0; i<group_of_people.length; i++){
             group_of_people[i] = new Number();
-            System.out.println(group_of_people[i].geneticInformation);
         }
     }
 
     // Select fittest individual
     public int Selection1(){
-        int mostFit = 0;
-        for(int i=0; i<group_of_people.length; i++){
-            if(group_of_people[i].geneticInformation > mostFit){
-                mostFit = group_of_people[i].geneticInformation;
+        int fittest = 0 ;
+        int min = group_of_people[0].geneticInformation ;
+        for(int i=1; i<group_of_people.length; i++) {
+            if (Math.abs(2-group_of_people[i].geneticInformation) <= min) {
+                min = Math.abs(2-group_of_people[i].geneticInformation) ;
+                fittest = group_of_people[i].geneticInformation ;
             }
         }
-        return(mostFit);
+        return(fittest);
     }
 
     // Select second fittest individual
-    public int Selection2(){
-        int mostFit = 0;
-        int secondMostFit = 0;
-        for(int i=0; i<group_of_people.length; i++){
-            if(group_of_people[i].geneticInformation > mostFit){
-                secondMostFit = mostFit;
-                mostFit = group_of_people[i].geneticInformation;
+    public int Selection2() {
+
+        int[] copy = new int[10] ;
+
+        for (int i = 0; i < group_of_people.length; i++) {
+            copy[i] = group_of_people[i].geneticInformation;
+        }
+        int n = copy.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (copy[j] > copy[j + 1]) {
+                    int temp = copy[j];
+                    copy[j] = copy[j + 1];
+                    copy[j + 1] = temp;
+                }
             }
         }
-        return(secondMostFit);
+        return(copy[1]);
+    }
+
+    public int Selection3() {
+        int leastFit = 0 ;
+        int max = group_of_people[0].geneticInformation ;
+        for(int i=1; i<group_of_people.length; i++) {
+            if (Math.abs(2-group_of_people[i].geneticInformation) >= max) {
+                max = Math.abs(2-group_of_people[i].geneticInformation) ;
+                leastFit = group_of_people[i].geneticInformation ;
+            }
+        }
+        return(leastFit);
     }
 
     // Form child by taking first part of parent 1 and mixing with second part of parent 2
@@ -45,19 +66,17 @@ public class Population {
 
         // Start exchanging at the randomly designated cut Gene
         for(int i=0; i<cut; i++){
-            childGenInfo[i] = parent1.toBinary(parent1.geneticInformation)[i];
-            System.out.println("Adding "+parent1.toBinary(parent1.geneticInformation)[i]+" from parent 1");
+            childGenInfo[i] = parent1.toBinary(parent1.geneticInformation)[i]; // child copy the parent
         }
         for(int i=cut; i<parent2.toBinary(parent2.geneticInformation).length; i++){
             childGenInfo[i] = parent2.toBinary(parent2.geneticInformation)[i];
-            System.out.println("Adding "+parent2.toBinary(parent2.geneticInformation)[i]+" from parent 2");
         }
-
+/*
         for(int i=0; i<8; i++){
             System.out.print(childGenInfo[i]);
         }
-
-        return(new Number(childGenInfo));
+*/
+        return(new Number(childGenInfo)); // geneticInformation contains childGenInfo (decimal)
     }
 
     public Number Mutation(Number child){
@@ -81,12 +100,22 @@ public class Population {
 
         boolean foundIndividual = false;
         for(int i=0; i<population.length; i++){
-            if (population[i].geneticInformation == population[i].fitness_Score(population[i].geneticInformation)){
+            if (population[i].geneticInformation == 2){
                 foundIndividual = true;
             }
         }
-
         return(foundIndividual);
     }
+
+    public boolean repetition(Number[] population){
+        int cpt = population[0].geneticInformation ;
+        for (int i = 0 ; i < population.length-1 ; i++) {
+            if (population[i+1].geneticInformation != population[i].geneticInformation) {
+                cpt++ ;
+            }
+        }
+        return cpt <= 5;
+    }
+
 
 }
