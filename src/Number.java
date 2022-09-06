@@ -2,27 +2,27 @@ import java.util.Random;
 
 public class Number {
 
-    // int_random == geneticInformation
     int geneticInformation;
 
     public Number(){
-        // The Number(person)'s genetic information/chromosome
-        // int_random = chromosome
         Random rand = new Random();
         this.geneticInformation = rand.nextInt(255);
     }
 
+    // Create a number with a specific geneticInformation
     public Number(int geneticInfo){
         this.geneticInformation = geneticInfo;
     }
 
+    // Create a number with a specific binary geneticInformation
     public Number(int[] binaryGeneticInfo){
         this.geneticInformation = toDecimal(binaryGeneticInfo);
     }
 
+    // Convert a decimal number to binary
     public int[] toBinary(int n){
 
-        int binary[] = new int[8];
+        int[] binary = new int[8];
         int cpt = 0;
 
         while(n>0){
@@ -35,11 +35,6 @@ public class Number {
             binary[i] = binary[binary.length-1-i];
             binary[binary.length-1-i] = temp;
         }
-/*
-        for(int i=0; i< binary.length; i++){
-            System.out.print(binary[i]);
-        }
- */
         return(binary);
     }
 
@@ -51,6 +46,7 @@ public class Number {
         return(result);
     }
 
+    // Convert a binary number to decimal
     public int toDecimal(int[] n){
         int sum = 0;
         int cpt = 7;
@@ -63,7 +59,13 @@ public class Number {
         return(sum);
     }
 
+    // Calculate the fitness of the Number
     public int fitness_Score(int x){
         return((power((x+3), 2) - 25));
+    }
+
+    @Override
+    public String toString() {
+        return(String.valueOf(this.geneticInformation));
     }
 }
