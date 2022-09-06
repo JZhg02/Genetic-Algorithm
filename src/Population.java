@@ -31,10 +31,9 @@ public class Population {
         for (int i = 0; i < group_of_people.length; i++) {
             copy[i] = group_of_people[i].geneticInformation;
         }
-        int n = copy.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (copy[j] > copy[j + 1]) {
+        for (int i = 0; i < copy.length - 1; i++) {
+            for (int j = 0; j < copy.length - i - 1; j++) {
+                if (Math.abs(2 - copy[j]) > Math.abs(2 - copy[j + 1])) {
                     int temp = copy[j];
                     copy[j] = copy[j + 1];
                     copy[j + 1] = temp;
@@ -107,6 +106,7 @@ public class Population {
         return(foundIndividual);
     }
 
+    /*
     public boolean repetition(Number[] population){
         int cpt = population[0].geneticInformation ;
         for (int i = 0 ; i < population.length-1 ; i++) {
@@ -114,8 +114,13 @@ public class Population {
                 cpt++ ;
             }
         }
-        return cpt <= 5;
+        return cpt <= 3;
+    }*/
+
+    public boolean termination(int i){
+        if(i>5000){
+            return true;
+        }
+        return false;
     }
-
-
 }

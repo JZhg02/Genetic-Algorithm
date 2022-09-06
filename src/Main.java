@@ -54,15 +54,17 @@ public class Main {
 
         //Initiate first generation
         Population sample = new Population();
-        System.out.println("Population: ");
+        int genCpt = 1;
+        System.out.printf("Population %d:", genCpt);
         System.out.printf("[ ");
         for(int i=0; i<sample.group_of_people.length; i++){
             System.out.print(sample.group_of_people[i].geneticInformation+" ");
         }
-        System.out.printf("]");
+        System.out.printf("]\n");
 
         // While we haven't found our individual, redo the process
-        while(!sample.checkIndividual(sample.group_of_people) && !sample.repetition(sample.group_of_people)){
+        // while(!sample.checkIndividual(sample.group_of_people) && !sample.repetition(sample.group_of_people))
+        while(!sample.checkIndividual(sample.group_of_people) && !sample.termination(genCpt)){
             //Selection of the 2 fittest
             int indexParent1 = 0;
             int indexParent2 = 0;
@@ -90,7 +92,8 @@ public class Main {
                 }
             }
 
-            System.out.println("Population: ");
+            genCpt++;
+            System.out.printf("Population %d: ", genCpt );
             System.out.printf("[ ");
             for(int i=0; i<sample.group_of_people.length; i++){
                 System.out.print(sample.group_of_people[i].geneticInformation+" ");
@@ -98,12 +101,18 @@ public class Main {
             System.out.printf("]\n");
         }
 
+        /*
         if (!sample.repetition(sample.group_of_people)){
             System.out.println("Found him!");
         } else {
-            System.out.println("Can't find him!");
-        }
+            System.out.println("Can't find him...");
+        }*/
 
+        if (!sample.termination(genCpt)){
+            System.out.println("Found him!");
+        } else {
+            System.out.println("Can't find him...");
+        }
 
     }
 }
