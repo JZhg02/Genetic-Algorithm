@@ -12,7 +12,6 @@ public class Main {
         // Iteration counter
         int genCpt = 1;
         System.out.println(sample.toString(genCpt));
-
         // While we haven't found our individual, redo the process
         while(!sample.checkIndividual(sample.group_of_people) && !sample.termination(genCpt)){
             //Selection of the 2 fittest
@@ -22,7 +21,9 @@ public class Main {
                 if(sample.selectionFittest() == sample.group_of_people[i].geneticInformation){
                     indexParent1 = i;
                 }
-                else if (sample.selection2Fittest() == sample.group_of_people[i].geneticInformation){
+            }
+            for(int i=0; i<sample.group_of_people.length; i++){
+                if (sample.selection2Fittest() == sample.group_of_people[i].geneticInformation){
                     indexParent2 = i;
                 }
             }

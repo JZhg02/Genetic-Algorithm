@@ -13,18 +13,16 @@ public class Population {
 
     // Select the fittest individual (closest to 2)
     public int selectionFittest(){
-        int fittest = 0 ;
-        int min = group_of_people[0].geneticInformation ;
+        int fittest = group_of_people[0].geneticInformation ;
         for(int i=1; i<group_of_people.length; i++) {
-            if (Math.abs(2-group_of_people[i].geneticInformation) <= min) {
-                min = Math.abs(2-group_of_people[i].geneticInformation) ;
+            if (Math.abs(2-group_of_people[i].geneticInformation) < Math.abs(2-fittest)) {
                 fittest = group_of_people[i].geneticInformation ;
             }
         }
         return(fittest);
     }
 
-    // Select the second fittest individual (Bubble-sorted an array and took the 2 lowest number)
+    // Select the second fittest individual (Bubble-sorted an array and took the 2nd lowest number)
     public int selection2Fittest() {
 
         int[] copy = new int[10] ;
@@ -46,11 +44,9 @@ public class Population {
 
     // Select the least fit individual
     public int selectionLeastFit() {
-        int leastFit = 0 ;
-        int max = group_of_people[0].geneticInformation ;
+        int leastFit = group_of_people[0].geneticInformation ;
         for(int i=1; i<group_of_people.length; i++) {
-            if (Math.abs(2-group_of_people[i].geneticInformation) >= max) {
-                max = Math.abs(2-group_of_people[i].geneticInformation) ;
+            if (Math.abs(2-group_of_people[i].geneticInformation) > Math.abs(2-leastFit)) {
                 leastFit = group_of_people[i].geneticInformation ;
             }
         }
@@ -62,7 +58,7 @@ public class Population {
 
         System.out.println("These are the parents: "+parent1+" & "+parent2);
         Random rand = new Random();
-        int cut = rand.nextInt(1, 6);
+        int cut = rand.nextInt(1, 7);
 
         int[] childGenInfo = new int[8];
 
@@ -80,7 +76,7 @@ public class Population {
     public Number Mutation(Number child){
 
         Random rand = new Random();
-        int randomGene = rand.nextInt(0,7);
+        int randomGene = rand.nextInt(0,8);
         int[] newGenInfo = child.toBinary(child.geneticInformation);
 
         if(newGenInfo[randomGene] == 1){
@@ -159,7 +155,7 @@ public class Population {
 
     // Terminate the process when we get to the 1000th iteration
     public boolean termination(int i){
-        if(i>1000){
+        if(i>10000){
             return true;
         }
         return false;
