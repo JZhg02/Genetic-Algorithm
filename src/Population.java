@@ -155,7 +155,7 @@ public class Population {
 
     // Terminate the process when we get to the 1000th iteration
     public boolean termination(int i){
-        if(i>10000){
+        if(i>50000){
             return true;
         }
         return false;

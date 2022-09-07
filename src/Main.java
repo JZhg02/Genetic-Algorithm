@@ -27,7 +27,12 @@ public class Main {
                     indexParent2 = i;
                 }
             }
-            Number newChild = sample.reproduction(sample.group_of_people[indexParent1], sample.group_of_people[indexParent2]);
+            Number newChild = new Number();
+            if (sample.group_of_people[indexParent1].geneticInformation == 3 && sample.group_of_people[indexParent2].geneticInformation == 1) {
+                newChild = sample.reproduction(sample.group_of_people[indexParent2], sample.group_of_people[indexParent1]);
+            } else {
+                newChild = sample.reproduction(sample.group_of_people[indexParent1], sample.group_of_people[indexParent2]);
+            }
             newChild = sample.Mutation(newChild);
             //Selection of the least fit
             int indexLeastFit = 0;
