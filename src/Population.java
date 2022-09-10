@@ -63,12 +63,18 @@ public class Population {
         int[] childGenInfo = new int[8];
 
         // Start exchanging at the randomly designated cut Gene
+        System.out.print("[");
         for(int i=0; i<cut; i++){
             childGenInfo[i] = parent1.toBinary(parent1.geneticInformation)[i]; // child copy the parent
+            System.out.print(" "+parent1.toBinary(parent1.geneticInformation)[i]+" ");
         }
+        System.out.print(" + ");
         for(int i=cut; i<parent2.toBinary(parent2.geneticInformation).length; i++){
             childGenInfo[i] = parent2.toBinary(parent2.geneticInformation)[i];
+            System.out.print(" "+parent2.toBinary(parent2.geneticInformation)[i]+" ");
         }
+        Number child  = new Number(childGenInfo);
+        System.out.println("] = "+child.geneticInformation);
         return(new Number(childGenInfo)); // geneticInformation contains childGenInfo (decimal)
     }
 
@@ -86,6 +92,12 @@ public class Population {
         }
         child.geneticInformation = child.toDecimal(newGenInfo);
 
+        System.out.print("Newly mutated gene: ");
+        System.out.print("[");
+        for(int i=0; i<newGenInfo.length; i++){
+            System.out.print(" "+ newGenInfo[i] +" ");
+        }
+        System.out.println("]  = "+child.geneticInformation);
         return(child);
     }
 
