@@ -108,16 +108,16 @@ public class Population {
 
         Random rand = new Random();
 
-        int randomGene = rand.nextInt(0,7);
+        int randomGene = rand.nextInt(0,8);
         if(newGenInfo[randomGene] == 1){
             newGenInfo[randomGene] = 0;
         } else {
             newGenInfo[randomGene] = 1;
         }
 
-        int randomGene2 = rand.nextInt(0,7);
+        int randomGene2 = rand.nextInt(0,8);
         while (randomGene2 == randomGene)
-            randomGene2 = rand.nextInt(0,7);
+            randomGene2 = rand.nextInt(0,8);
         if (newGenInfo[randomGene2] == 1) {
             newGenInfo[randomGene2] = 0 ;
         }
@@ -126,9 +126,9 @@ public class Population {
 
 
         /*
-        int randomGene3 = rand.nextInt(0,7);
+        int randomGene3 = rand.nextInt(0,8);
         while (randomGene3 == randomGene || randomGene3 == randomGene2)
-            randomGene3 = rand.nextInt(0,7);
+            randomGene3 = rand.nextInt(0,8);
         if (newGenInfo[randomGene3] == 1) {
             newGenInfo[randomGene3] = 0 ;
         }
@@ -137,9 +137,9 @@ public class Population {
 
         */
         /*
-        int randomGene4 = rand.nextInt(0,7);
+        int randomGene4 = rand.nextInt(0,8);
         while (randomGene4 == randomGene || randomGene4 == randomGene2 || randomGene4 == randomGene3)
-            randomGene4 = rand.nextInt(0,7);
+            randomGene4 = rand.nextInt(0,8);
         if (newGenInfo[randomGene4] == 1) {
             newGenInfo[randomGene4] = 0 ;
         }
