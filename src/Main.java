@@ -20,12 +20,12 @@ public class Main {
             int indexParent1 = 0;
             int indexParent2 = 0;
             for(int i=0; i<sample.group_of_people.length; i++){ // take the index of the fittest parent
-                if(sample.selectionFittest() == sample.group_of_people[i].geneticInformation){
+                if(sample.selectionFittest() == Math.abs(sample.group_of_people[i].fitness_Score())){
                     indexParent1 = i;
                 }
             }
             for(int i=0; i<sample.group_of_people.length; i++){ // the index of the 2nd fittest parent
-                if (sample.selection2Fittest() == sample.group_of_people[i].geneticInformation){
+                if (sample.selection2Fittest() == Math.abs(sample.group_of_people[i].fitness_Score())){
                     indexParent2 = i;
                 }
             }
@@ -50,7 +50,7 @@ public class Main {
             //Selection of the least fit
             int indexLeastFit = 0;
             for(int i=0; i<sample.group_of_people.length; i++){
-                if(sample.selectionLeastFit() == sample.group_of_people[i].geneticInformation){
+                if(sample.selectionLeastFit() == Math.abs(sample.group_of_people[i].fitness_Score())){
                     indexLeastFit = i;
                 }
             }

@@ -60,8 +60,8 @@ public class Number {
     }
 
     // Calculate the fitness of the Number
-    public int fitness_Score(int x){
-        return((power((x+3), 2) - 25));
+    public int fitness_Score(){
+        return((power((this.geneticInformation+3), 2) - 25));
     }
 
     @Override

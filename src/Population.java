@@ -12,13 +12,13 @@ public class Population {
 
     // Select the fittest individual (closest to 2)
     public int selectionFittest(){
-        int fittest = group_of_people[0].geneticInformation ;
+        int fittestScore = Math.abs(group_of_people[0].fitness_Score()) ;
         for(int i=1; i<group_of_people.length; i++) {
-            if (Math.abs(2-group_of_people[i].geneticInformation) < Math.abs(2-fittest)) {
-                fittest = group_of_people[i].geneticInformation ;
+            if (Math.abs(group_of_people[i].fitness_Score()) < fittestScore) {
+                fittestScore = Math.abs(group_of_people[i].fitness_Score()) ;
             }
         }
-        return(fittest);
+        return(fittestScore);
     }
 
     // Select the second fittest individual (Bubble-sorted an array and took the 2nd lowest number)
@@ -27,11 +27,11 @@ public class Population {
         int[] copy = new int[10] ;
 
         for (int i = 0; i < group_of_people.length; i++) {
-            copy[i] = group_of_people[i].geneticInformation;
+            copy[i] = Math.abs(group_of_people[i].fitness_Score());
         }
         for (int i = 0; i < copy.length - 1; i++) { // arrange from the smallest from the highest
             for (int j = 0; j < copy.length - i - 1; j++) {
-                if (Math.abs(2 - copy[j]) > Math.abs(2 - copy[j + 1])) { // switch if it's higher than the next one
+                if (copy[j] > copy[j+1]) { // switch if it's higher than the next one
                     int temp = copy[j];
                     copy[j] = copy[j + 1];
                     copy[j + 1] = temp;
@@ -43,10 +43,10 @@ public class Population {
 
     // Select the least fit individual
     public int selectionLeastFit() {
-        int leastFit = group_of_people[0].geneticInformation ;
+        int leastFit = Math.abs(group_of_people[0].fitness_Score()) ;
         for(int i=1; i<group_of_people.length; i++) {
-            if (Math.abs(2-group_of_people[i].geneticInformation) > Math.abs(2-leastFit)) { // farthest from 2
-                leastFit = group_of_people[i].geneticInformation ;
+            if (Math.abs(group_of_people[i].fitness_Score()) > leastFit) { // farthest from 0
+                leastFit = Math.abs(group_of_people[i].fitness_Score()) ;
             }
         }
         return(leastFit);
@@ -166,7 +166,7 @@ public class Population {
 
     // Terminate the process when we get to the 1000th iteration
     public boolean termination(int i){
-        if(i>50000){
+        if(i>1000){
             return true;
         }
         return false;
