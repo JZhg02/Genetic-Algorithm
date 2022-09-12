@@ -29,23 +29,23 @@ public class Population {
         for (int i = 0; i < group_of_people.length; i++) {
             copy[i] = group_of_people[i].geneticInformation;
         }
-        for (int i = 0; i < copy.length - 1; i++) {
+        for (int i = 0; i < copy.length - 1; i++) { // arrange from the smallest from the highest
             for (int j = 0; j < copy.length - i - 1; j++) {
-                if (Math.abs(2 - copy[j]) > Math.abs(2 - copy[j + 1])) {
+                if (Math.abs(2 - copy[j]) > Math.abs(2 - copy[j + 1])) { // switch if it's higher than the next one
                     int temp = copy[j];
                     copy[j] = copy[j + 1];
                     copy[j + 1] = temp;
                 }
             }
         }
-        return(copy[1]);
+        return(copy[1]); // take the second highest
     }
 
     // Select the least fit individual
     public int selectionLeastFit() {
         int leastFit = group_of_people[0].geneticInformation ;
         for(int i=1; i<group_of_people.length; i++) {
-            if (Math.abs(2-group_of_people[i].geneticInformation) > Math.abs(2-leastFit)) {
+            if (Math.abs(2-group_of_people[i].geneticInformation) > Math.abs(2-leastFit)) { // farthest from 2
                 leastFit = group_of_people[i].geneticInformation ;
             }
         }
@@ -57,22 +57,22 @@ public class Population {
 
         System.out.println("These are the parents: "+parent1+" & "+parent2);
         Random rand = new Random();
-        int cut = rand.nextInt(1, 7);
+        int cut = rand.nextInt(1, 7); // can't be 0 or 8
 
         int[] childGenInfo = new int[8];
 
         // Start exchanging at the randomly designated cut Gene
         System.out.print("[");
         for(int i=0; i<cut; i++){
-            childGenInfo[i] = parent1.toBinary(parent1.geneticInformation)[i]; // child copy the parent
+            childGenInfo[i] = parent1.toBinary(parent1.geneticInformation)[i]; // child copy half the parent 1
             System.out.print(" "+parent1.toBinary(parent1.geneticInformation)[i]+" ");
         }
         System.out.print(" + ");
-        for(int i=cut; i<parent2.toBinary(parent2.geneticInformation).length; i++){
+        for(int i=cut; i<parent2.toBinary(parent2.geneticInformation).length; i++){ // and half the parent 2
             childGenInfo[i] = parent2.toBinary(parent2.geneticInformation)[i];
             System.out.print(" "+parent2.toBinary(parent2.geneticInformation)[i]+" ");
         }
-        Number child  = new Number(childGenInfo);
+        Number child  = new Number(childGenInfo); // transform in decimal
         System.out.println("] = "+child.geneticInformation);
         return(new Number(childGenInfo)); // geneticInformation contains childGenInfo (decimal)
     }
@@ -81,22 +81,22 @@ public class Population {
     public Number Mutation(Number child){
 
         Random rand = new Random();
-        int randomGene = rand.nextInt(0,8);
-        int[] newGenInfo = child.toBinary(child.geneticInformation);
+        int randomGene = rand.nextInt(0,8); // choose a random number from 0 to 7
+        int[] newGenInfo = child.toBinary(child.geneticInformation); // decimal of the child to binary
 
         if(newGenInfo[randomGene] == 1){
             newGenInfo[randomGene] = 0;
         } else {
             newGenInfo[randomGene] = 1;
         }
-        child.geneticInformation = child.toDecimal(newGenInfo);
+        child.geneticInformation = child.toDecimal(newGenInfo); // binary to decimal
 
         System.out.print("Newly mutated gene: ");
         System.out.print("[");
         for(int i=0; i<newGenInfo.length; i++){
-            System.out.print(" "+ newGenInfo[i] +" ");
+            System.out.print(" "+ newGenInfo[i] +" "); // binary
         }
-        System.out.println("]  = "+child.geneticInformation);
+        System.out.println("] = "+child.geneticInformation); // decimal
         return(child);
     }
 
@@ -104,7 +104,7 @@ public class Population {
     // This creates a lot more variations, hence why it's much harder to find an individual to the solution
     public Number Mutation2(Number child){
 
-        int[] newGenInfo = child.toBinary(child.geneticInformation);
+        int[] newGenInfo = child.toBinary(child.geneticInformation); // decimal to binary
 
         Random rand = new Random();
 
@@ -147,7 +147,7 @@ public class Population {
             newGenInfo[randomGene4] = 1 ;
         */
 
-        child.geneticInformation = child.toDecimal((newGenInfo)) ;
+        child.geneticInformation = child.toDecimal((newGenInfo)) ; // binary to decimal
 
         return(child);
     }

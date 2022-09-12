@@ -19,12 +19,12 @@ public class Main {
             //Selection of the 2 fittest
             int indexParent1 = 0;
             int indexParent2 = 0;
-            for(int i=0; i<sample.group_of_people.length; i++){
+            for(int i=0; i<sample.group_of_people.length; i++){ // take the index of the fittest parent
                 if(sample.selectionFittest() == sample.group_of_people[i].geneticInformation){
                     indexParent1 = i;
                 }
             }
-            for(int i=0; i<sample.group_of_people.length; i++){
+            for(int i=0; i<sample.group_of_people.length; i++){ // the index of the 2nd fittest parent
                 if (sample.selection2Fittest() == sample.group_of_people[i].geneticInformation){
                     indexParent2 = i;
                 }
@@ -34,7 +34,7 @@ public class Main {
             Number newChild = new Number();
             // Mutate
             if (sample.group_of_people[indexParent1].geneticInformation == previousParent1 &&
-                    sample.group_of_people[indexParent2].geneticInformation == previousParent2) {
+                    sample.group_of_people[indexParent2].geneticInformation == previousParent2) { // switch the 2 parents if they are the same
                 newChild = sample.reproduction(sample.group_of_people[indexParent2], sample.group_of_people[indexParent1]);
                 previousParent1 = sample.group_of_people[indexParent2].geneticInformation;
                 previousParent2 = sample.group_of_people[indexParent1].geneticInformation;
